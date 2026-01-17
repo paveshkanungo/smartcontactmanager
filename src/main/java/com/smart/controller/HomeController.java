@@ -101,13 +101,8 @@ public class HomeController {
 
 /*
  * 
- * In this lecture, we have improved processing and rendering on /user/index means dashboard page.
- * Improved user_dashboard.html and base.html which is inside normal folder.
- * Previously, we were having base.html for all visitors, now if the user is valid,
- * then we need to display the base.html from normal folder. Here, navbar is changed.
- * Included userName in place of login and for signin -> logout.
- * 
- *
+ * In this lecture, we have created responsive sidebar on the user page.
+ * Used font awesome icons for the sidebar.
  * 
  * */
 
