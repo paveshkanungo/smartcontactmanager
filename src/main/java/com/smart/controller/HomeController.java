@@ -101,8 +101,10 @@ public class HomeController {
 
 /*
  * 
- * In this lecture, we have created responsive sidebar on the user page.
- * Used font awesome icons for the sidebar.
+ * In this previous some lectures, we have learnt how to keep the
+ * message in the session and display it in the template. Then how to
+ * remove the message from the session too.
+ * Attaching ss :)
  * 
  * */
 
