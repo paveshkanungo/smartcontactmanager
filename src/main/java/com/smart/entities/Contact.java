@@ -9,11 +9,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Contact")
+@Table(name = "Contact")
 public class Contact {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cId;
 	private String name;
 	private String secondName;
@@ -21,18 +21,19 @@ public class Contact {
 	private String email;
 	private String phone;
 	private String image;
-	
-	@Column(length=1000)
+
+	@Column(length = 1000)
 	private String description;
-	
+
 	@ManyToOne()
 	private User user;
-	
+
 	public Contact() {
 		super();
 	}
 
-	public Contact(int cId, String name, String secondName, String work, String email, String phone, String image, String description, User user) {
+	public Contact(int cId, String name, String secondName, String work, String email, String phone, String image,
+			String description, User user) {
 		super();
 		this.cId = cId;
 		this.name = name;
@@ -120,8 +121,7 @@ public class Contact {
 	@Override
 	public String toString() {
 		return "Contact [cId=" + cId + ", name=" + name + ", secondName=" + secondName + ", work=" + work + ", email="
-				+ email + ", phone=" + phone + ", image=" + image + ", description=" + description + ", user=" + user
-				+ "]";
+				+ email + ", phone=" + phone + ", image=" + image + ", description=" + description + "]";
 	}
-	
+
 }
