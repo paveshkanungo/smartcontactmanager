@@ -22,7 +22,7 @@
                                                 <i class="fa fa-plus"></i>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" 
+                                        <input required type="text" class="form-control" 
                                                th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
                                                id="firstName" name="name" placeholder="Enter first name" th:field="*{name}">
                                         
@@ -38,7 +38,7 @@
                                             <i class="fas fa-user-alt"></i>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" id="secondName" name="secondName" placeholder="Enter Nick Name" th:field="*{secondName}">
+                                    <input required type="text" class="form-control" id="secondName" name="secondName" placeholder="Enter Nick Name" th:field="*{secondName}">
                                 </div>
 
                                 <!-- Phone -->
@@ -48,7 +48,7 @@
                                             <i class="fas fa-phone"></i>
                                         </div>
                                     </div>
-                                    <input type="number" class="form-control" 
+                                    <input required type="number" class="form-control" 
                                            th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}"
                                            id="phone" name="phone" placeholder="Enter Phone Number" th:field="*{phone}">
                                            
@@ -63,7 +63,7 @@
                                             @
                                         </div>
                                     </div>
-                                    <input type="email" class="form-control" 
+                                    <input required type="email" class="form-control" 
                                            th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
                                            id="email" name="email" placeholder="Enter email here" th:field="*{email}">
                                            
@@ -78,12 +78,12 @@
                                             <i class="fas fa-briefcase"></i>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" id="work" name="work" placeholder="Enter work here" th:field="*{work}">
+                                    <input required type="text" class="form-control" id="work" name="work" placeholder="Enter work here" th:field="*{work}">
                                 </div>
 
                                 <!-- Contact Description -->
                                 <div class="form-group mt-3">
-                                    <textarea class="form-control" id="description" name="description" placeholder="Enter contact description" th:field="*{description}" rows="7"></textarea>
+                                    <textarea class="form-control" id="mytextarea" name="description" placeholder="Enter contact description" th:field="*{description}" rows="7"></textarea>
                                 </div>
 
                                 <!-- Contact Image -->
