@@ -44,12 +44,6 @@ public class UserController {
 	@Autowired
 	private ContactRepository contactRepository;
 
-	private Contact contact;
-
-	private User userByUserName;
-
-	private Contact contact2;
-
 	// method for adding common data to response
 	@ModelAttribute
 	public void addCommonData(Model model, Principal principal) {
@@ -205,8 +199,9 @@ public class UserController {
 				e.printStackTrace();
 			}
 
-			contact.setUser(null);
-			this.contactRepository.delete(contact);
+			user.getContacts().remove(contact);
+			this.userRepository.save(user);
+
 			System.out.println("DELETED :)");
 			session.setAttribute("message", new Message("Contact deleted successfully!", "success"));
 		}
@@ -221,7 +216,13 @@ public class UserController {
 
 		Contact contact = this.contactRepository.findById(cId).get();
 
-		model.addAttribute("contact", contact);
+		// check if contact belongs to user
+		User user = this.userRepository.getUserByUserName(principal.getName());
+		if (user.getId() == contact.getUser().getId()) {
+			model.addAttribute("contact", contact);
+		} else {
+			return "redirect:/user/index";
+		}
 
 		return "normal/update_form";
 	}
