@@ -162,11 +162,11 @@ public class UserController {
 
 		String userName = principal.getName();
 		User user = this.userRepository.getUserByUserName(userName);
-	
+
 		Optional<Contact> contactOptional = this.contactRepository.findById(cId);
 		Contact contact = contactOptional.get();
 
-		if(user.getId() == contact.getUser().getId()){
+		if (user.getId() == contact.getUser().getId()) {
 			model.addAttribute("contact", contact);
 			model.addAttribute("title", "Contact Detail");
 		} else {
@@ -175,4 +175,37 @@ public class UserController {
 
 		return "normal/contact_detail";
 	}
+
+	// Delete contact handler
+	@GetMapping("/delete-contact/{cId}")
+	public String deleteContact(@PathVariable("cId") Integer cId, Model model, Principal principal,
+			HttpSession session) {
+
+		Optional<Contact> contactOptional = this.contactRepository.findById(cId);
+		Contact contact = contactOptional.get();
+
+		String userName = principal.getName();
+		User user = this.userRepository.getUserByUserName(userName);
+
+		if (user.getId() == contact.getUser().getId()) {
+			// remove contact image too
+			try {
+				File deleteFile = new ClassPathResource("static/img").getFile();
+				File file1 = new File(deleteFile, contact.getImage());
+				if (file1.exists() && !contact.getImage().equals("default.png")) {
+					file1.delete();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			contact.setUser(null);
+			this.contactRepository.delete(contact);
+			System.out.println("DELETED :)");
+			session.setAttribute("message", new Message("Contact deleted successfully!", "success"));
+		}
+
+		return "redirect:/user/show-contacts/0";
+	}
+
 }
