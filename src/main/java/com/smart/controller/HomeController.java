@@ -101,10 +101,29 @@ public class HomeController {
 
 /*
  * 
- * In this previous some lectures, we have learnt how to keep the
- * message in the session and display it in the template. Then how to
- * remove the message from the session too.
- * Attaching ss :)
+ * In this lecture, we have learnt about Pagination.
+ * On our show contacts page, we have added pagination.
+ * For Pagination, we have used Pageable interface.
+ * See UserController, 'currentPage' is representing 'page' which we
+ * are taking on url. We are using PageRequest.of() to create a Pageable
+ * object. We are using Pageable to get the contacts from the database
+ * using contactRepository.findContactsByUser().
+ * See ContactRepository, 'findContactsByUser' is a method which is
+ * using Pageable to get the contacts from the database.
+ * If you open Pageable, you mostly see getters like getPageNumber()
+ * and getPageSize(). It looks like a simple data holder, and that
+ * is exactly what it is. 
+ * Pageable itself doesn't do the work. It is just an enveloper
+ * that carries two numbers:
+ * 1. Page Number, means which page?
+ * 2. Page Size, means how many items per page?
+ * The "Useful" work happens inside Spring Data JPA's internal query
+ * builder, hidden deep inside the library.
+ * When you write this line in your ContactRepository:
+ * public Page<Contact> findContactsByUser(@Param("userId") int userId, Pageable pageable);
+ * Spring Data JPA sees the Pageable argument and internally 
+ * generates SQL like this:
+ * SELECT * FROM contact WHERE user_id = 5 LIMIT 3 OFFSET 0;
  * 
  * */
 
