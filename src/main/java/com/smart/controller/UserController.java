@@ -158,13 +158,20 @@ public class UserController {
 
 	// showing specific contact detail
 	@GetMapping("/{cId}/contact")
-	public String showContactDetail(Model model, @PathVariable("cId") Integer cId) {
+	public String showContactDetail(Model model, @PathVariable("cId") Integer cId, Principal principal) {
+
+		String userName = principal.getName();
+		User user = this.userRepository.getUserByUserName(userName);
 	
 		Optional<Contact> contactOptional = this.contactRepository.findById(cId);
 		Contact contact = contactOptional.get();
 
-		model.addAttribute("contact", contact);
-		model.addAttribute("title", "Contact Detail");
+		if(user.getId() == contact.getUser().getId()){
+			model.addAttribute("contact", contact);
+			model.addAttribute("title", "Contact Detail");
+		} else {
+			return "redirect:/user/index";
+		}
 
 		return "normal/contact_detail";
 	}
