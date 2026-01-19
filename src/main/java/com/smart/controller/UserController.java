@@ -44,6 +44,12 @@ public class UserController {
 	@Autowired
 	private ContactRepository contactRepository;
 
+	private Contact contact;
+
+	private User userByUserName;
+
+	private Contact contact2;
+
 	// method for adding common data to response
 	@ModelAttribute
 	public void addCommonData(Model model, Principal principal) {
@@ -206,6 +212,63 @@ public class UserController {
 		}
 
 		return "redirect:/user/show-contacts/0";
+	}
+
+	// update contact handler
+	@PostMapping("/update-contact/{cId}")
+	public String updateForm(@PathVariable("cId") Integer cId, Model model, Principal principal) {
+		model.addAttribute("title", "Update Contact");
+
+		Contact contact = this.contactRepository.findById(cId).get();
+
+		model.addAttribute("contact", contact);
+
+		return "normal/update_form";
+	}
+
+	// processing update contact handler
+	@PostMapping("/process-update")
+	public String updateHandler(@Valid @ModelAttribute("contact") Contact contact, BindingResult bindingResult,
+			@RequestParam("profileImage") MultipartFile file, Model model, Principal principal,
+			HttpSession session) {
+
+		try {
+			// image handling
+
+			Contact oldContactDetail = this.contactRepository.findById(contact.getcId()).get();
+
+			if (!file.isEmpty()) {
+				// delete old contact image
+				File deleteFile = new ClassPathResource("static/img").getFile();
+				File file1 = new File(deleteFile, oldContactDetail.getImage());
+				if (file1.exists() && !oldContactDetail.getImage().equals("default.png")) {
+					file1.delete();
+				}
+
+				// upload new contact image
+				File saveFile = new ClassPathResource("static/img").getFile();
+
+				Path path = Paths.get(saveFile.getAbsoluteFile() + File.separator + file.getOriginalFilename());
+
+				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+				contact.setImage(file.getOriginalFilename());
+
+			} else {
+				contact.setImage(oldContactDetail.getImage());
+			}
+
+			User user = this.userRepository.getUserByUserName(principal.getName());
+
+			contact.setUser(user);
+			this.contactRepository.save(contact);
+
+			session.setAttribute("message", new Message("Contact updated successfully!", "success"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/user/" + contact.getcId() + "/contact";
 	}
 
 }

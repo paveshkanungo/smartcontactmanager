@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>UpdateForm</title>
+</head>
+<body>
+	<section>
+
+		<div class="card mr-3 ml-3">
+            <div class="card-body">
+                <h1 class="text-center">Update Contact</h1>
+                <div class="container-fluid mt-1">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <form action="#" th:object="${contact}" method="POST" enctype="multipart/form-data" th:action="@{/user/process-update}" class="mt-2">
+
+                                <input type="hidden" th:field="*{cId}">
+
+                                <!-- First Name -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-plus"></i>
+                                            </div>
+                                        </div>
+                                        <input required type="text" class="form-control" 
+                                               th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                                               id="firstName" name="name" placeholder="Enter first name" th:field="*{name}">
+                                        
+                                        <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Second Name -->
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-user-alt"></i>
+                                        </div>
+                                    </div>
+                                    <input required type="text" class="form-control" id="secondName" name="secondName" placeholder="Enter Nick Name" th:field="*{secondName}">
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-phone"></i>
+                                        </div>
+                                    </div>
+                                    <input required type="number" class="form-control" 
+                                           th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}"
+                                           id="phone" name="phone" placeholder="Enter Phone Number" th:field="*{phone}">
+                                           
+                                    <div class="invalid-feedback" th:each="e : ${#fields.errors('phone')}" th:text="${e}">
+                                    </div>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            @
+                                        </div>
+                                    </div>
+                                    <input required type="email" class="form-control" 
+                                           th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+                                           id="email" name="email" placeholder="Enter email here" th:field="*{email}">
+                                           
+                                    <div class="invalid-feedback" th:each="e : ${#fields.errors('email')}" th:text="${e}">
+                                    </div>
+                                </div>
+
+                                <!-- Work -->
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-briefcase"></i>
+                                        </div>
+                                    </div>
+                                    <input required type="text" class="form-control" id="work" name="work" placeholder="Enter work here" th:field="*{work}">
+                                </div>
+
+                                <!-- Contact Description -->
+                                <div class="form-group mt-3">
+                                    <textarea class="form-control" id="mytextarea" name="description" placeholder="Enter contact description" th:field="*{description}" rows="7"></textarea>
+                                </div>
+
+                                <!-- Contact Image -->
+                                <p>Update Photo:</p>
+
+                                <div class="custom-file">
+                                    <input type="file" name="profileImage" id="profileImage">
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="container text-center mt-3">
+                                    <button type="submit" class="btn btn-outline-primary">Update Contact</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+	</section>
+</body>
+</html>

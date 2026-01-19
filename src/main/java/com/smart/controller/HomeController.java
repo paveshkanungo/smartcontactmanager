@@ -101,10 +101,9 @@ public class HomeController {
 
 /*
  * 
- * In this lecture, we have added delete button logic,
- * also for delete button we have added a confirmation dialog,
- * which is using sweetalert library.
- * 
+ * In this lecture, we have added update button, and its page
+ * where user can update the details of the contact.
+ * The processing logic of update contact is yet to be implemented.
  * */
 
 
