@@ -8,7 +8,22 @@ A Spring Boot application for managing contacts efficiently.
 - **Spring Boot 4.x**
 - **Thymeleaf** (Frontend)
 - **MySQL** (Database)
-- **Spring Security**
+- **Spring Security** (Authentication & Authorization)
+
+## ✨ Features
+
+- **User Authentication**: Secure Login/Signup with CSRF protection.
+- **Dashboard**: Smart sidebar navigation and profile summary.
+- **Contact Management**:
+  - **Add Contact**: Form with server-side validation and image upload.
+  - **View Contacts**: Paginated list view (5 contacts per page).
+  - **Contact Details**: Individual contact view with option to update or delete.
+  - **Update Contact**: Secure form to edit contact details and replace profile images.
+  - **Delete Contact**: Secure deletion with JS confirmation popup (deletes image from server).
+- **Profile View**: Dedicated user profile page.
+- **Security**:
+  - IDOR protection (users can only access their own data).
+  - Session-based message handling (SweetAlert/Bootstrap alerts).
 
 ## 🚀 Getting Started
 
