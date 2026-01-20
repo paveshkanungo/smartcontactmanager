@@ -236,7 +236,7 @@ public class UserController {
 		try {
 			// image handling
 
-			Contact oldContactDetail = this.contactRepository.findById(contact.getcId()).get();
+			Contact oldContactDetail = this.contactRepository.findById(contact.getCId()).get();
 
 			if (!file.isEmpty()) {
 				// delete old contact image
@@ -269,12 +269,12 @@ public class UserController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/user/" + contact.getcId() + "/contact";
+		return "redirect:/user/" + contact.getCId() + "/contact";
 	}
 
 	// profile handler
 	@GetMapping("/profile")
-	public String yourProfile(Model model){
+	public String yourProfile(Model model) {
 		model.addAttribute("title", "Profile Page");
 		return "normal/profile";
 	}

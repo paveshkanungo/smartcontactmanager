@@ -1,5 +1,7 @@
 package com.smart.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,7 @@ public class Contact {
 	private String description;
 
 	@ManyToOne()
+	@JsonIgnore
 	private User user;
 
 	public Contact() {
@@ -46,11 +49,11 @@ public class Contact {
 		this.user = user;
 	}
 
-	public int getcId() {
+	public int getCId() {
 		return cId;
 	}
 
-	public void setcId(int cId) {
+	public void setCId(int cId) {
 		this.cId = cId;
 	}
 
@@ -125,8 +128,8 @@ public class Contact {
 	}
 
 	@Override
-	public boolean equals(Object obj){
-		return this.cId == ((Contact)obj).cId;
+	public boolean equals(Object obj) {
+		return this.cId == ((Contact) obj).cId;
 	}
 
 }

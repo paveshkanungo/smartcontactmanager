@@ -101,3 +101,18 @@ body{
 	object-fit: cover;
 	border-radius: 50%;
 }
+
+.search-container{
+	position: relative;
+}
+
+.search-container .search-result{
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background: #FFFFFF;
+	width: 100%;
+	z-index: 99999999999;
+	border: 1px solid gray;
+	display: none;
+}
